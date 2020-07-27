@@ -21,7 +21,8 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+    val, key = max([(val, key) for key, val in hist.d.items()])
+    return key
 
 
 def AllModes(hist):
@@ -31,8 +32,8 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
-
+    sorted_list = sorted(hist.Items(), key = itemgetter(1), reverse = True)
+    return sorted_list
 
 def main(script):
     """Tests the functions in this module.
@@ -55,6 +56,9 @@ def main(script):
         print(value, freq)
 
     print('%s: All tests passed.' % script)
+
+    print('effect size for birth weight : {}'.format(thinkstats2.CohenEffectSize(firsts.totalwgt_lb, others.totalwgt_lb)))
+    print('effect size for pregnancy length : {}'.format(thinkstats2.CohenEffectSize(firsts.prglngth, others.prglngth)))
 
 
 if __name__ == '__main__':
